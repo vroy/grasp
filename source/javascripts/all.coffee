@@ -8,6 +8,7 @@
 #= require ./element
 #
 #= require ./options
+#= require ./circle
 #= require ./line
 #= require ./canvas
 #= require ./ready

@@ -3,9 +3,9 @@ Grasp.Line = Grasp.Element.extend
   initialize: (opts={}) ->
     Grasp.Element.prototype.initialize.apply(this, arguments)
 
-    @line  = @add(@createLine())
-    @small = @add(@createSmallCircle())
-    @arrow = @add(@createArrow())
+    @line  = @add @createLine()
+    @small = @add @createSmallCircle()
+    @arrow = @add @createArrow()
 
     @line.on  "moving", (e) => @moveLine(@line)
     @small.on "moving", (e) => @movePoint(@small)

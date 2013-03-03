@@ -10,8 +10,9 @@ Grasp.Canvas = Backbone.View.extend
       y = info.e.pageY - offset.top
 
       switch Grasp.options.currentElementType()
-        when "line"  then @startLine(info.target, x, y)
-        when "trash" then @trashElement(info.target)
+        when "line"   then @startLine(info.target, x, y)
+        when "circle" then @startCircle(info.target, x ,y)
+        when "trash"  then @trashElement(info.target)
 
   trashElement: (target) ->
     return unless target?
@@ -22,3 +23,7 @@ Grasp.Canvas = Backbone.View.extend
   startLine: (target, x, y) ->
     return if target? # Only return if outside of an existing element.
     @objects.push new Grasp.Line(canvas: @canvas, coords: [x, y, x, y])
+
+  startCircle: (target, x, y) ->
+    return if target? # Only return if outside of an existing element.
+    @objects.push new Grasp.Circle(canvas: @canvas, coords: [x, y])
