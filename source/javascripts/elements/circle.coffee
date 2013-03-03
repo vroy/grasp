@@ -10,7 +10,7 @@ Grasp.Circle = Grasp.Element.extend
       if @trackingCircle
         offset = @canvas.el.offset()
         offsetX = info.e.pageX - offset.left
-        radius = offsetX - @options.coords[0]
+        radius = (offsetX - @options.coords[0]) / 2
 
         if radius > 0
           @circle.setRadius(radius)
