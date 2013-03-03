@@ -13,12 +13,14 @@ Grasp.Line = Grasp.Element.extend
 
   createLine: ->
     new fabric.Line @options.coords,
+      fill: "#f00"
       strokeWidth: 2
       hasBorders: false
       hasControls: false
 
   createSmallCircle: ->
     new fabric.Circle
+      fill: "#f00"
       radius: 4
       hasBorders: false
       hasControls: false
@@ -29,6 +31,7 @@ Grasp.Line = Grasp.Element.extend
 
   createArrow: ->
     new fabric.Triangle
+      fill: "#f00"
       height: 25
       width: 18
       hasControls: false
