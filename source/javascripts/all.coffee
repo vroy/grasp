@@ -1,14 +1,12 @@
-#= require ./jquery-1.9.1.min
-#= require ./fabric
-#= require ./underscore
-#= require ./backbone
+#= require ./vendor/jquery-1.9.1.min
+#= require ./vendor/fabric
+#= require ./vendor/underscore
+#= require ./vendor/backbone
 #
-#= require ./namespace
+#= require ./lib/namespace
+#= require ./lib/element
 #
-#= require ./element
+#= require_tree ./views
+#= require_tree ./elements
 #
-#= require ./options
-#= require ./circle
-#= require ./line
-#= require ./canvas
 #= require ./ready
