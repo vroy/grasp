@@ -1,2 +1,4 @@
 $ ->
-  new Grasp.Canvas( $("#image-canvas") )
+  Grasp.options = new Grasp.Options el: $("#options")
+
+  new Grasp.Canvas $("#image-canvas")

@@ -4,12 +4,21 @@ Grasp.Canvas = Backbone.View.extend
     @canvas = new fabric.Canvas(@el.get(0), selection: false)
     @objects = [ ]
 
-    @objects.push new Grasp.Line(@canvas, [100, 100, 100, 200])
-    @objects.push new Grasp.Line(@canvas, [300, 300, 400, 200])
-
     @canvas.on "mouse:down", (info) =>
-      if !info.target? # Only proceed if the cursor is not already applied to a previous element
-        offset = @el.offset()
-        x = info.e.pageX - offset.left
-        y = info.e.pageY - offset.top
-        @objects.push new Grasp.Line(@canvas, [x, y, x, y], fire: true)
+      offset = @el.offset()
+      x = info.e.pageX - offset.left
+      y = info.e.pageY - offset.top
+
+      switch Grasp.options.currentElementType()
+        when "line"  then @startLine(info.target, x, y)
+        when "trash" then @trashElement(info.target)
+
+  trashElement: (target) ->
+    return unless target?
+
+    _.each @objects, (obj) ->
+      obj.dispose() if obj.id == target.unique_id
+
+  startLine: (target, x, y) ->
+    return if target? # Only return if outside of an existing element.
+    @objects.push new Grasp.Line(canvas: @canvas, coords: [x, y, x, y])

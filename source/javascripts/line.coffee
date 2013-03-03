@@ -1,36 +1,44 @@
 # Hold a drawn line and update state as it is moved around.
-Grasp.Line = Backbone.View.extend
-  initialize: (canvas, coords, opts={}) ->
-    @canvas = canvas
-    @coords = coords
+Grasp.Line = Grasp.Element.extend
+  initialize: (opts={}) ->
+    Grasp.Element.prototype.initialize.apply(this, arguments)
 
-    @createLine()
-    @createSmallCircle()
-    @createArrow()
-
-    @canvas.add(@line, @small, @arrow)
+    @line  = @add(@createLine())
+    @small = @add(@createSmallCircle())
+    @arrow = @add(@createArrow())
 
     @line.on  "moving", (e) => @moveLine(@line)
     @small.on "moving", (e) => @movePoint(@small)
     @arrow.on "moving", (e) => @movePoint(@arrow)
 
   createLine: ->
-    @line = new fabric.Line(@coords, strokeWidth: 2, hasBorders: false, hasControls: false)
+    new fabric.Line @options.coords,
+      strokeWidth: 2
+      hasBorders: false
+      hasControls: false
 
   createSmallCircle: ->
-    @small = new fabric.Circle(radius: 4, hasBorders: false, hasControls: false)
-    @small.left = @line.x1
-    @small.top  = @line.y1
-    @small.line = @line
-    @small.point_index = "1"
+    new fabric.Circle
+      radius: 4
+      hasBorders: false
+      hasControls: false
+      left: @line.x1
+      top:  @line.y1
+      line: @line
+      point_index: "1"
 
   createArrow: ->
-    @arrow = new fabric.Triangle(height: 25, width: 18, hasControls: false, hasBorders: false, hasRotatingPoint: false)
-    @arrow.left = @line.x2
-    @arrow.top  = @line.y2
-    @arrow.point_index = "2"
-    @arrow.line = @line
-    @updateArrowAngle()
+    new fabric.Triangle
+      height: 25
+      width: 18
+      hasControls: false
+      hasBorders: false
+      hasRotatingPoint: false
+      angle: 90
+      left: @line.x2
+      top:  @line.y2
+      point_index: "2"
+      line: @line
 
   updateArrowAngle: ->
     ydiff = @line.y2 - @line.y1

@@ -4,8 +4,10 @@ title: Welcome to Grasp
 
 <h1>Grasp is screenshotting</h1>
 
-<label for="draw-line">Draw line</label>
-<input type="checkbox" id="draw-line" />
+<div id="options">
+  <label><input type="radio" name="element-type" value="line" checked="true" /> Draw line</label>
+  <label><input type="radio" name="element-type" value="trash" /> Trash</label>
+</div>
 
 <canvas id="image-canvas" width="600" height="400"></canvas>
 
