@@ -3,28 +3,33 @@ Grasp.Ellipse = Grasp.Element.extend
     Grasp.Element.prototype.initialize.apply(this, arguments)
 
     @ellipse = @add @createEllipse()
-    @tracking = true
 
-    @canvas.on "mouse:move", (info) =>
-      if @tracking
-        offset = @canvas.el.offset()
+    @canvas.on "mouse:move", (info) => @resizeEllipse(info)
+    @canvas.on "mouse:up", (info) => @stopResize(info)
 
-        offsetX = info.e.pageX - offset.left
-        rx = (offsetX - @options.x) / 2
-        if rx > 0
-          @ellipse.left = @options.x + rx
-          @ellipse.rx = rx
+  stopResize: (info) ->
+    @canvas.off "mouse:move"
+    @canvas.off "mouse:up"
 
-        offsetY = info.e.pageY - offset.top
-        ry = (offsetY - @options.y) / 2
-        if ry > 0
-          @ellipse.top = @options.y + ry
-          @ellipse.ry = ry
+  resizeEllipse: (info) ->
+    offset = @canvas.el.offset()
 
-        @canvas.renderAll()
+    offsetX = info.e.pageX - offset.left
+    rx = (offsetX - @options.x) / 2
+    if rx > 0
+      @ellipse.left = @options.x + rx
+      @ellipse.rx = rx
+      @ellipse.width = rx * 2
 
-    @canvas.on "mouse:up", (info) =>
-      @tracking = false
+    offsetY = info.e.pageY - offset.top
+    ry = (offsetY - @options.y) / 2
+    if ry > 0
+      @ellipse.top = @options.y + ry
+      @ellipse.ry = ry
+      @ellipse.height = ry * 2
+
+    @ellipse.setCoords()
+    @canvas.renderAll()
 
   createEllipse: ->
     new fabric.Ellipse
