@@ -12,16 +12,14 @@ Grasp.Ellipse = Grasp.Element.extend
     @canvas.off "mouse:up"
 
   resizeEllipse: (info) ->
-    offset = @canvas.el.offset()
+    [offsetX, offsetY] = @cursorOffset(info)
 
-    offsetX = info.e.pageX - offset.left
     rx = (offsetX - @options.x) / 2
     if rx > 0
       @ellipse.left = @options.x + rx
       @ellipse.rx = rx
       @ellipse.width = rx * 2
 
-    offsetY = info.e.pageY - offset.top
     ry = (offsetY - @options.y) / 2
     if ry > 0
       @ellipse.top = @options.y + ry

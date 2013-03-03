@@ -22,3 +22,11 @@ Grasp.Element = Backbone.View.extend
   updateCoords: ->
     @canvas.renderAll()
     _.each @objects, (obj) -> obj.setCoords()
+
+  cursorOffset: (info) ->
+    offset = @canvas.el.offset()
+
+    offsetX = info.e.pageX - offset.left
+    offsetY = info.e.pageY - offset.top
+
+    return [offsetX, offsetY]

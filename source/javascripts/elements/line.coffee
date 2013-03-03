@@ -12,9 +12,9 @@ Grasp.Line = Grasp.Element.extend
     @arrow.on "moving", (e) => @movePoint(@arrow)
 
     @canvas.on "mouse:move", (info) =>
-      offset = @canvas.el.offset()
-      @arrow.left = info.e.pageX - offset.left
-      @arrow.top = info.e.pageY - offset.top
+      [offsetX, offsetY] = @cursorOffset(info)
+      @arrow.left = offsetX
+      @arrow.top = offsetY
       @movePoint(@arrow)
       @updateCoords()
 
