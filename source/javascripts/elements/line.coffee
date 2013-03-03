@@ -11,6 +11,17 @@ Grasp.Line = Grasp.Element.extend
     @small.on "moving", (e) => @movePoint(@small)
     @arrow.on "moving", (e) => @movePoint(@arrow)
 
+    @canvas.on "mouse:move", (info) =>
+      offset = @canvas.el.offset()
+      @arrow.left = info.e.pageX - offset.left
+      @arrow.top = info.e.pageY - offset.top
+      @movePoint(@arrow)
+      @updateCoords()
+
+    @canvas.on "mouse:up", (info) =>
+      @canvas.off "mouse:move"
+      @canvas.off "mouse:up"
+
   createLine: ->
     new fabric.Line @options.coords,
       fill: "#f00"

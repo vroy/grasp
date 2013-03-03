@@ -28,8 +28,7 @@ Grasp.Ellipse = Grasp.Element.extend
       @ellipse.ry = ry
       @ellipse.height = ry * 2
 
-    @ellipse.setCoords()
-    @canvas.renderAll()
+    @updateCoords()
 
   createEllipse: ->
     new fabric.Ellipse
