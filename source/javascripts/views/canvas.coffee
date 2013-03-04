@@ -3,9 +3,17 @@ Grasp.Canvas = Backbone.View.extend
     @el = el
     @canvas = new fabric.Canvas(@el.get(0), selection: false)
     @canvas.el = @el
+
+    Grasp.options = new Grasp.Options el: $("#options"), canvas: @canvas
     @objects = [ ]
 
     # @inspector()
+
+    fabric.Image.fromURL "/images/example.png", (img) =>
+      img.scaleToWidth(@canvas.width)
+      img.scaleToHeight(@canvas.height)
+      img.set originX: 'left', originY: 'top', selectable: false
+      @canvas.add(img)
 
     @canvas.on "mouse:down", (info) =>
       offset = @el.offset()

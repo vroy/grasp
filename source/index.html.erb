@@ -5,12 +5,14 @@ title: Grasp
 <h1>Grasp</h1>
 
 <div id="options">
-  <label><input type="radio" name="element-type" value="move"/> Move</label>
-  <label><input type="radio" name="element-type" value="line"/> Draw line</label>
-  <label><input type="radio" name="element-type" value="ellipse" checked="true" /> Circle</label>
+  <label><input type="radio" name="element-type" value="move" checked="true" /> Move</label>
+  <label><input type="radio" name="element-type" value="line" /> Draw line</label>
+  <label><input type="radio" name="element-type" value="ellipse" /> Circle</label>
   <label><input type="radio" name="element-type" value="trash" /> Trash</label>
+  <input type="button" name="dump-json-to-console" value="Dump JSON to console" />
+  <input type="button" name="dump-open-as-image" value="Open as image in a new tab" />
 </div>
 
-<canvas id="image-canvas" width="600" height="400"></canvas>
+<canvas id="image-canvas" width="1000" height="600"></canvas>
 
 
