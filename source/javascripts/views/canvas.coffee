@@ -23,6 +23,7 @@ Grasp.Canvas = Backbone.View.extend
       switch Grasp.options.currentElementType()
         when "line"    then @startLine(info.target, x, y)
         when "ellipse" then @startEllipse(info.target, x ,y)
+        when "text"    then @startText(info.target, x, y, info.e)
         when "trash"   then @trashElement(info.target)
 
   trashElement: (target) ->
@@ -31,12 +32,16 @@ Grasp.Canvas = Backbone.View.extend
     _.each @objects, (obj) ->
       obj.dispose() if obj.id == target.unique_id
 
+  startText: (target, x, y, e) ->
+    return if target? # Only proceed if outside of an existing element.
+    @objects.push new Grasp.Text(canvas: @canvas, e: e, x: x, y: y)
+
   startLine: (target, x, y) ->
-    return if target? # Only return if outside of an existing element.
+    return if target? # Only proceed if outside of an existing element.
     @objects.push new Grasp.Line(canvas: @canvas, coords: [x, y, x, y])
 
   startEllipse: (target, x, y) ->
-    return if target? # Only return if outside of an existing element.
+    return if target? # Only proceed if outside of an existing element.
     @objects.push new Grasp.Ellipse(canvas: @canvas, x: x, y: y)
 
 
