@@ -1,4 +1,3 @@
-# Hold a drawn line and update state as it is moved around.
 Grasp.Arrow = Grasp.Element.extend
   initialize: (opts={}) ->
     Grasp.Element.prototype.initialize.apply(this, arguments)
