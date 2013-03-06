@@ -9,11 +9,13 @@ Test with an example screenshot:
 
 ## Canvas features
 
+* Should see image at 100%, or at least export at 100%
 * Pressing 1=move, 2=arrow, 3=ellipse, 4=rectangle, 5=text, etc
 * Pressing Ctrl or CMD should toggle move temporarily and revert back
 * Free form
 * Eraser
 * Paint filling intersecting areas
+* Update font to someting nicer
 * Choose color
 * Choose font-size
 * Choose form sizes (widths)
