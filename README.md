@@ -11,7 +11,6 @@ Test with an example screenshot:
 
 * Pressing 1=move, 2=arrow, 3=ellipse, 4=rectangle, 5=text, etc
 * Pressing Ctrl or CMD should toggle move temporarily and revert back
-* Rectangles
 * Free form
 * Lines
 * Eraser
