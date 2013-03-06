@@ -16,6 +16,7 @@ Test with an example screenshot:
 * Eraser
 * Paint filling intersecting areas
 * Update font to someting nicer
+* Forms should work in all directions. Example: a rectangle started at 100,100 should be able to make it to { top: 50, left: 50, right: 100, bottom: 100 }
 * Choose color
 * Choose font-size
 * Choose form sizes (widths)
