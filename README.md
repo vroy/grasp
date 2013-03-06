@@ -10,12 +10,10 @@ Test with an example screenshot:
 ## Canvas features
 
 * Should see image at 100%, or at least export at 100%
-* Pressing 1=move, 2=arrow, 3=ellipse, 4=rectangle, 5=text, etc
 * Pressing Ctrl or CMD should toggle move temporarily and revert back
 * Free form
 * Eraser
 * Paint filling intersecting areas
-* Update font to someting nicer
 * Forms should work in all directions. Example: a rectangle started at 100,100 should be able to make it to { top: 50, left: 50, right: 100, bottom: 100 }
 * Choose color
 * Choose font-size

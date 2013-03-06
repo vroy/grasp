@@ -37,3 +37,5 @@ Grasp.Text = Grasp.Element.extend
       fill: "#f00"
       hasBorders: false
       hasControls: false
+      fontFamily: "sans-serif"
+      fontWeight: 600
