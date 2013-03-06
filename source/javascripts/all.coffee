@@ -2,6 +2,7 @@
 #= require ./vendor/fabric
 #= require ./vendor/underscore
 #= require ./vendor/backbone
+#= require ./vendor/keymaster.min
 #
 #= require ./lib/namespace
 #= require ./lib/element

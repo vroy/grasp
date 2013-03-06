@@ -7,6 +7,10 @@ Grasp.Options = Backbone.View.extend
     @el = opts.el
     @canvas = opts.canvas
 
+    key '1,2,3,4,5,6,7', (event, handler) =>
+      @el.find("[data-option-id]").prop("checked", false)
+      @el.find("[data-option-id=#{handler.key}]").prop("checked", true)
+
   currentElementType: ->
     @el.find("input:checked").val()
 
