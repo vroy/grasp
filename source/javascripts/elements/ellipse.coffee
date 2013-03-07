@@ -14,17 +14,15 @@ Grasp.Ellipse = Grasp.Element.extend
   resizeEllipse: (info) ->
     [offsetX, offsetY] = @cursorOffset(info)
 
-    rx = (offsetX - @options.x) / 2
-    if rx > 0
-      @ellipse.left = @options.x + rx
-      @ellipse.rx = rx
-      @ellipse.width = rx * 2
+    width = offsetX - @options.x
+    @ellipse.width = Math.abs(width)
+    @ellipse.rx = @ellipse.width/2
+    @ellipse.left = @options.x + width/2
 
-    ry = (offsetY - @options.y) / 2
-    if ry > 0
-      @ellipse.top = @options.y + ry
-      @ellipse.ry = ry
-      @ellipse.height = ry * 2
+    height = offsetY - @options.y
+    @ellipse.height = Math.abs(height)
+    @ellipse.ry = @ellipse.height/2
+    @ellipse.top = @options.y + height/2
 
     @updateCoords()
 

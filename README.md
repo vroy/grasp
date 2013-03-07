@@ -13,7 +13,6 @@ Test with an example screenshot:
 * Pressing Ctrl or CMD should toggle move temporarily and revert back
 * Eraser
 * Paint filling intersecting areas
-* Forms should work in all directions. Example: a rectangle started at 100,100 should be able to make it to { top: 50, left: 50, right: 100, bottom: 100 }
 * Choose color
 * Choose font-size
 * Choose form sizes (widths)

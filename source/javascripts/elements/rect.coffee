@@ -14,15 +14,11 @@ Grasp.Rect = Grasp.Element.extend
   resizeRect: (info) ->
     [offsetX, offsetY] = @cursorOffset(info)
 
-    rx = (offsetX - @options.x) / 2
-    if rx > 0
-      @rect.left = @options.x + rx
-      @rect.width = rx * 2
+    @rect.width = offsetX - @options.x
+    @rect.left = @options.x + @rect.width/2
 
-    ry = (offsetY - @options.y) / 2
-    if ry > 0
-      @rect.top = @options.y + ry
-      @rect.height = ry * 2
+    @rect.height = offsetY - @options.y
+    @rect.top = @options.y + @rect.height/2
 
     @updateCoords()
 
