@@ -7,8 +7,6 @@ Grasp.Canvas = Backbone.View.extend
     Grasp.options = new Grasp.Options el: $("#options"), canvas: @canvas
     @objects = [ ]
 
-    # @inspector()
-
     fabric.Image.fromURL "/images/example.png", (img) =>
       img.scaleToWidth(@canvas.width)
       img.scaleToHeight(@canvas.height)
@@ -64,16 +62,3 @@ Grasp.Canvas = Backbone.View.extend
   startRect: (target, x, y) ->
     return if target? # Only proceed if outside of an existing element.
     @objects.push new Grasp.Rect(canvas: @canvas, x: x, y: y)
-
-
-  inspector: ->
-    events = [
-      "object:modified", "object:selected",
-      "object:moving", "object:scaling", "object:rotating",
-      "before:selection:cleared", "selection:cleared", "selection:created",
-      "mouse:up", "mouse:down", "mouse:move",
-      "after:render",
-      "path:created", "object:added"
-    ]
-    _.each events, (event) =>
-      @canvas.on event, (info) -> console.log "#{event}(%o, %o)", info.e, info.target
