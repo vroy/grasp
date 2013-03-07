@@ -18,6 +18,7 @@ Grasp.Canvas = Backbone.View.extend
       if info.target.type == "path"
         info.target.hasBorders = false
         info.target.hasControls = false
+        info.target.unique_id = _.uniqueId()
         @objects.push info.target
 
     @canvas.on "mouse:down", (info) =>
