@@ -1,7 +1,7 @@
 Grasp.Canvas = Backbone.View.extend
   initialize: (el) ->
     @el = el
-    @canvas = new fabric.Canvas(@el.get(0), selection: false)
+    @canvas = new fabric.Canvas(@el.get(0), selection: false, freeDrawingColor: "#f00", freeDrawingLineWidth: 2)
     @canvas.el = @el
 
     Grasp.options = new Grasp.Options el: $("#options"), canvas: @canvas
@@ -14,6 +14,13 @@ Grasp.Canvas = Backbone.View.extend
       img.scaleToHeight(@canvas.height)
       img.set originX: 'left', originY: 'top', selectable: false
       @canvas.add(img)
+
+    # Track objects created from free drawing.
+    @canvas.on "object:added", (info) =>
+      if info.target.type == "path"
+        info.target.hasBorders = false
+        info.target.hasControls = false
+        @objects.push info.target
 
     @canvas.on "mouse:down", (info) =>
       offset = @el.offset()
@@ -32,7 +39,11 @@ Grasp.Canvas = Backbone.View.extend
     return unless target?
 
     _.each @objects, (obj) ->
-      obj.dispose() if obj.id == target.unique_id
+      if obj.id == target.unique_id
+        if _.isFunction(obj.dispose)
+          obj.dispose()
+        else if _.isFunction(obj.remove)
+          obj.remove()
 
   startText: (target, x, y, e) ->
     return if target? # Only proceed if outside of an existing element.
