@@ -33,15 +33,17 @@ Grasp.Canvas = Backbone.View.extend
         when "rect"    then @startRect(info.target, x, y)
         when "trash"   then @trashElement(info.target)
 
-  trashElement: (target) ->
-    return unless target?
+  findObjectsByUniqueId: (target) ->
+    _.filter @objects, (obj) -> obj.id == target.unique_id
 
-    _.each @objects, (obj) ->
-      if obj.id == target.unique_id
-        if _.isFunction(obj.dispose)
-          obj.dispose()
-        else if _.isFunction(obj.remove)
-          obj.remove()
+  trashElement: (target) ->
+    return if !target?
+
+    _.each @findObjectsByUniqueId(target), (obj) ->
+      if _.isFunction(obj.dispose)
+        obj.dispose()
+      else if _.isFunction(obj.remove)
+        obj.remove()
 
   startText: (target, x, y, e) ->
     return if target? # Only proceed if outside of an existing element.
