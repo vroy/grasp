@@ -4,12 +4,14 @@ Grasp.Rect = Grasp.Element.extend
 
     @rect = @add @createRect()
 
-    @canvas.on "mouse:move", (info) => @resizeRect(info)
-    @canvas.on "mouse:up", (info) => @stopResize(info)
+    @move_cb = (info) => @resizeRect(info)
+    @up_cb = (info) => @stopResize(info)
+    @canvas.on "mouse:move", @move_cb
+    @canvas.on "mouse:up", @up_cb
 
   stopResize: (info) ->
-    @canvas.off "mouse:move"
-    @canvas.off "mouse:up"
+    @canvas.off "mouse:move", @move_cb
+    @canvas.off "mouse:up", @up_cb
 
   resizeRect: (info) ->
     [offsetX, offsetY] = @cursorOffset(info)

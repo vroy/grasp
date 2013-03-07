@@ -4,12 +4,14 @@ Grasp.Ellipse = Grasp.Element.extend
 
     @ellipse = @add @createEllipse()
 
-    @canvas.on "mouse:move", (info) => @resizeEllipse(info)
-    @canvas.on "mouse:up", (info) => @stopResize(info)
+    @move_cb = (info) => @resizeEllipse(info)
+    @stop_cb = (info) => @stopResize(info)
+    @canvas.on "mouse:move", @move_cb
+    @canvas.on "mouse:up", @stop_cb
 
   stopResize: (info) ->
-    @canvas.off "mouse:move"
-    @canvas.off "mouse:up"
+    @canvas.off "mouse:move", @move_cb
+    @canvas.off "mouse:up", @stop_cb
 
   resizeEllipse: (info) ->
     [offsetX, offsetY] = @cursorOffset(info)

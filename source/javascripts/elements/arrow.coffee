@@ -10,16 +10,18 @@ Grasp.Arrow = Grasp.Element.extend
     @small.on "moving", (e) => @movePoint(@small)
     @arrow.on "moving", (e) => @movePoint(@arrow)
 
-    @canvas.on "mouse:move", (info) =>
+    @move_cb = (info) =>
       [offsetX, offsetY] = @cursorOffset(info)
       @arrow.left = offsetX
       @arrow.top = offsetY
       @movePoint(@arrow)
       @updateCoords()
+    @canvas.on "mouse:move", @move_cb
 
-    @canvas.on "mouse:up", (info) =>
-      @canvas.off "mouse:move"
-      @canvas.off "mouse:up"
+    @up_cb = (info) =>
+      @canvas.off "mouse:move", @move_cb
+      @canvas.off "mouse:up", @up_cb
+    @canvas.on "mouse:up", @up_cb
 
   createLine: ->
     new fabric.Line @options.coords,
